@@ -9,7 +9,7 @@ const colorConfigs = {
     activeBg: "#1e253a"
   },
   topbar: {
-    bg: "#fff",
+    bg: "#b6d7a8",
     color: "#000"/* ,
     display: "flex",
     position: "relative" */
