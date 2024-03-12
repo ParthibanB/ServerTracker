@@ -23,10 +23,10 @@ const AddServerPage = (props: Props) => {
       console.log(serverDetails);
 
 
-      var login_response = await serverActions.addServer(serverDetails);
-      if(login_response.statusCode == 200){
+      var response = await serverActions.addServer(serverDetails);
+      if(response.statusCode == 200){
         alert('Server Registered successfully');
-        navigate('/dashboard/default', { state: { reg: "Dashboard" } });
+        navigate('/dashboard/manageserver', { state: { reg: "manageserver" } });
       }
       else{
         alert('Server Error');

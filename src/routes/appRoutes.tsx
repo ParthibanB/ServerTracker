@@ -5,7 +5,7 @@ import { RouteType } from "./config";
 import DefaultPage from "../pages/dashboard/DefaultPage";
 import DashboardIndex from "../pages/dashboard/DashboardIndex";
 import ChangelogPage from "../pages/changelog/ChangelogPage";
-import AnalyticsPage from "../pages/dashboard/AnalyticsPage";
+import ManageServerPage from "../pages/dashboard/ManageServer";
 import AddServerPage from "../pages/dashboard/AddServerPage";
 import ComponentPageLayout from "../pages/component/ComponentPageLayout";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
@@ -62,20 +62,21 @@ const appRoutes: RouteType[] = [
           displayText: "Default"
         },
       },
-      {
-        path: "/dashboard/analytics",
-        element: <AnalyticsPage />,
-        state: "dashboard.analytics",
-        sidebarProps: {
-          displayText: "Analytic"
-        }
-      },
+      
       {
         path: "/dashboard/add",
         element: <AddServerPage />,
         state: "dashboard.saas",
         sidebarProps: {
           displayText: "Add Server"
+        }
+      },
+      {
+        path: "/dashboard/manageserver",
+        element: <ManageServerPage />,
+        state: "dashboard.manageserver",
+        sidebarProps: {
+          displayText: "Manage Server"
         }
       }
     ]

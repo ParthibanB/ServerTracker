@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, makeStyles } from "@mui/material";
+import { AppBar, Button, Toolbar, Typography, makeStyles } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import { text } from "stream/consumers";
@@ -18,10 +18,18 @@ const Topbar = () => {
         align: "center"
       }}
     >
-      <Toolbar color="inherit" >
-        <Typography variant="h3" >
+      <Toolbar color="inherit">
+        <Typography sx={{ marginLeft: "auto" }} variant="h3" >
           Server Tracker
         </Typography>
+        <Button sx={{ marginLeft: "auto" }}
+                style={{ height: "fit-content" }}
+                color="primary"
+                variant="contained"
+                
+              >
+                Logout
+              </Button>
       </Toolbar>
     </AppBar>
   );
