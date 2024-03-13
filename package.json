@@ -59,5 +59,7 @@
   },
   "devDependencies": {
     "@types/react-alert": "^7.0.6"
-  }
+  },
+
+  "homepage": "http://localhost:3000/login"
 }
