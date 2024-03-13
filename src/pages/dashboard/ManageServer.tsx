@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 type Props = {};
 export default function ManageServerPage() {
 
-      let rows: any = [];
+      var rows: any = [];
       const navigate = useNavigate();
-      useEffect(() => {
+      
         const getUsers = async () => {
           var userName = localStorage.getItem("userName");
         console.log(userName);
@@ -19,6 +19,7 @@ export default function ManageServerPage() {
           if(getAllServers){
             alert('Reveiced all Server successfully');
             rows = getAllServers;
+            console.log("rows");
             console.log(rows);
          //   navigate('/dashboard/default', { state: { reg: "Dashboard" } });
           }
@@ -29,7 +30,8 @@ export default function ManageServerPage() {
           alert('Please Login to the Application');
         }
         }; 
-       }, []);      
+        getUsers(); 
+         
       
   const [clickedRow, setClickedRow] = React.useState();
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, row: React.SetStateAction<undefined>) => {
@@ -37,7 +39,7 @@ export default function ManageServerPage() {
     console.log(row);
     setClickedRow(row);
   };
-
+ 
   const [file, setFile] = useState()
 
   function fileOnchange(event:any) {
@@ -62,11 +64,12 @@ export default function ManageServerPage() {
   };
 
   const columns : GridColDef[] = [
-    { field: 'serverIp', headerName: 'server Ip', width: 350 },
+    { field: 'id', headerName: 'Id', width: 150 }, 
+    { field: 'serverIp', headerName: 'Server IP', width: 350 },
     {
       field: 'serverUserName',
-      headerName: 'server User Name',
-      width: 150,
+      headerName: 'Server User Name',
+      width: 350,
       editable: false,
     },
     {
@@ -111,25 +114,41 @@ export default function ManageServerPage() {
 
   [
     {
-      "id":1,
+        "id": 21,
+        "serverIp": "10.112.49.343",
+        "serverUserName": "netcrk",
+        "serverPassword": "crknet"
+    },
+    {
+        "id": 22,
+        "serverIp": "10.112.18.43",
+        "serverUserName": "netcrk",
+        "serverPassword": "crknet"
+    },
+    {
+        "id": 23,
         "serverIp": "http://10.109.29.202:6400/",
         "serverUserName": "CRKNET",
         "serverPassword": "NETCRK"
     },
-    {   "id":2,
+    {
+        "id": 24,
         "serverIp": "http://10.109.35.195/",
         "serverUserName": "U32_C5_6400",
         "serverPassword": "U32_C5_6400"
     }
 ]
-
+console.log("rows1");
+console.log(rows1);
   return (
     <><h1>
     <span style={{ textAlign: 'center' }}>Manage Server</span>
+     
   </h1><br></br><div>
-      <Box sx={{ height: 500, width: '60%' }}>
+
+      <Box sx={{ height: 500, width: '90%' }}>
         <DataGrid
-          rows={rows1}
+          rows={rows}
           columns={columns}
           initialState={{
             pagination: {
@@ -145,10 +164,13 @@ export default function ManageServerPage() {
       <h1>Bulk Upload Servers</h1>
           <input name="file" type="file" onChange={fileOnchange}/>
           <button type="submit" onClick={uploadBulkServer}>Upload</button>
+          
     </div></>
   );
 }
 
   
+
+
 
 
