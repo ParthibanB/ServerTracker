@@ -5,28 +5,37 @@ import { userActions } from '../../actions/UserActions';
 import { alertService } from '../../actions/AlterActions';
 import MuiAlert from "@material-ui/lab/Alert";
 
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState({ username: '' });
   const [credential, setPassword] = useState({ password: '' });
-
+  var isLoggedIn = localStorage.getItem("userName");
+ // var isLoggedIn =  false;
   // on login submit
   const submitLogin = async () => {
- 
+
     if (email.username && credential.password) {
       //this.setState({ submitted: true });           
       const newRecord = { asdfads: email.username, password: credential.password };
       console.log(newRecord);
       var login_response = await userActions.login(email.username, credential.password);
       if(login_response.statusCode == 200){
-        alert('user logged in successfully');
+       // alert('user logged in successfully');
+        //NotificationManager.success("user logged in successfully");
+        toast.success("user logged in successfully", {
+          position: "top-center"
+        });
         navigate('/dashboard/default', { state: { reg: "Dashboard" } });
       }
       else{
         alert('Server Error');
       }
     } else {
-      alert('Please Enter Username && Password');
+      toast.error("Please Enter Username && Password!", {
+        position: "top-center"
+      });
     }
 
   };
@@ -35,7 +44,7 @@ export default function Login() {
     navigate('/registration', { state: { reg: "Registraion" } });
   };
 
-
+  if(!isLoggedIn) {
   return (
     
     <Form id="login" className="login-form" action="" >
@@ -61,6 +70,13 @@ export default function Login() {
         onClick={submitLogin}
         className="btn btn-lg btn-dark btn-block button ">Login</Button>
       <Button onClick={routeChange} className="btn btn-lg btn-dark btn-block ">Register</Button>
+      <ToastContainer/>
     </Form>
   );
+}else {
+  return (
+    
+            <div> Logged User {isLoggedIn} </div>
+  );
+}
 }

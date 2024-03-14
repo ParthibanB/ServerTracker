@@ -3,54 +3,112 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowId, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
 import { ContentPasteSearchOutlined } from '@mui/icons-material';
 import { useState } from 'react';
+import { Button } from '@mui/material';
+import { serverActions } from '../../actions/ServerActions';
 
 export default function DataGridDemo() {
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID', width: 30 },
   {
     field: 'firstName',
-    headerName: 'First name',
-    width: 150,
+    headerName: 'Server IP',
+    width: 100,
     editable: true,
   },
   {
     field: 'lastName',
-    headerName: 'Last name',
+    headerName: 'Server Status',
+    width: 100,
+    editable: true,
+  },
+  {
+    field: 'tableSpace',
+    headerName: 'DB Table Space Occupy(%)',
+    type: 'number',
     width: 150,
     editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Age',
+    field: 'discSpace',
+    headerName: 'Disc Space Occupy(%)',
     type: 'number',
-    width: 110,
+    width: 150,
     editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    field: 'pocAM',
+    headerName: 'POC-AM Cache Status',
+    type: 'number',
+    width: 150,
+    editable: true,
   },
+  {
+    field: 'liveCatalog',
+    headerName: 'Live Billing Catalog',
+    type: 'number',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'team',
+    headerName: 'Notification Team',
+    type: 'number',
+    width: 150,
+    editable: true,
+  }
 ];
 const [rowSelectionModel, setRowSelectionModel] = React.useState<GridRowSelectionModel>([]);
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 2, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 3, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 4, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 5, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 6, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 7, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
+  { id: 8, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
 ];
 console.log(rowSelectionModel);
 
+const Referesh = async () => {
+    
+  if (true) {
+    //this.setState({ submitted: true });           
+    var response = await serverActions.getServers();
+    if(response.statusCode == 200){
+      alert('Servers Uploaded successfully');
+    }
+    else{
+      alert('Server Error');
+    }
+  } else {
+    alert('Please upload the file');
+  }
+
+};
+
+
   return (
+
+    <>
+    <Button sx={{ marginLeft: "auto" }}
+                style={{ height: "fit-content" }}
+                color="primary"
+                variant="contained"
+                onClick={Referesh}
+              >
+                Refresh  
+              </Button> &nbsp;&nbsp;&nbsp;
+
+              <Button sx={{ marginLeft: "auto" }}
+                style={{ height: "fit-content" }}
+                color="primary"
+                variant="contained"
+                onClick={Referesh}
+              >
+                Notify
+              </Button>
+
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
@@ -75,10 +133,9 @@ console.log(rowSelectionModel);
         }} */
         onRowSelectionModelChange={(newRowSelectionModel) => {
           setRowSelectionModel(newRowSelectionModel);
-        }}
+        } }
         rowSelectionModel={rowSelectionModel}
-        disableRowSelectionOnClick
-      />
-    </Box>
+        disableRowSelectionOnClick />
+    </Box></>
   );
 }

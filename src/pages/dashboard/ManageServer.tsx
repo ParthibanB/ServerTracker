@@ -7,18 +7,16 @@ import { serverActions } from '../../actions/ServerActions';
 import { useNavigate } from 'react-router-dom';
 type Props = {};
 export default function ManageServerPage() {
-
-      var rows: any = [];
+      const [rows, setRows] = useState([]);
       const navigate = useNavigate();
-      
+      useEffect(() => {
         const getUsers = async () => {
           var userName = localStorage.getItem("userName");
         console.log(userName);
         if (userName) {
           const getAllServers = await serverActions.getServers();
           if(getAllServers){
-            alert('Reveiced all Server successfully');
-            rows = getAllServers;
+            setRows(getAllServers);
             console.log("rows");
             console.log(rows);
          //   navigate('/dashboard/default', { state: { reg: "Dashboard" } });
@@ -29,8 +27,10 @@ export default function ManageServerPage() {
         } else {
           alert('Please Login to the Application');
         }
-        }; 
+        }
         getUsers(); 
+      },[]); 
+     // 
          
       
   const [clickedRow, setClickedRow] = React.useState();
@@ -164,7 +164,7 @@ console.log(rows1);
       <h1>Bulk Upload Servers</h1>
           <input name="file" type="file" onChange={fileOnchange}/>
           <button type="submit" onClick={uploadBulkServer}>Upload</button>
-          
+         
     </div></>
   );
 }
