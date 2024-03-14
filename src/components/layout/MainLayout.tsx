@@ -72,11 +72,12 @@ import Topbar from "../common/Topbar";
 const MainLayout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login"; // Assuming "/login" is your login route
+  const isRegistrationPage = location.pathname === "/registration"; // Assuming "/register" is your register route
 
   return (
     <Box sx={{ display: "flex" }}>
       <Topbar />
-      {!isLoginPage && ( // Render Sidebar only if not on the login page
+      {!isLoginPage && !isRegistrationPage &&( // Render Sidebar only if not on the login page
         <Box
           component="nav"
           sx={{
