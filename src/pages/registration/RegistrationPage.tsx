@@ -3,6 +3,7 @@ import {  useNavigate } from 'react-router-dom';
 import { Form, Button, FormGroup, Input, Label } from 'reactstrap';
 import { userActions } from '../../actions/UserActions';
 import React, { useState } from 'react';
+import backgroundImage from '../../assets/images/nc05.png';
 
 
 
@@ -34,15 +35,16 @@ const registerUser = async () => {
 
 
   return (
+  <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
   <div id="main-registration-container">
 
       <div id="register">     
       <Form id="login" className="login-form" >
       <div className="Welcome">
-        <h1>
-          <span className="font-weight-bold">Registration</span>
-        </h1>
-        <h2>Welcome</h2>
+        <h5>
+           <span className="font-weight-bold" style={{ color: '#00274C' }}>💻 Join the NC Server Tracker Registration Community! 💻</span>
+        </h5>
+        <h2></h2>
       </div>
       <FormGroup>
         <Label>Name</Label>
@@ -62,10 +64,12 @@ const registerUser = async () => {
       <Button
         variant="contained"
         onClick={registerUser}
+        style={{ backgroundColor: '#007681', color: '#FFFFFF' }}
         className="btn btn-lg btn-dark btn-block button ">Register</Button>
      
     </Form>
       </div>
+  </div>
   </div>
   );
 };

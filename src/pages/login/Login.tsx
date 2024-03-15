@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { userActions } from '../../actions/UserActions';
 import { alertService } from '../../actions/AlterActions';
 import MuiAlert from "@material-ui/lab/Alert";
+import backgroundImage from '../../assets/images/nc05.png';
 
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -46,13 +47,13 @@ export default function Login() {
 
   if(!isLoggedIn) {
   return (
-    
+    <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
     <Form id="login" className="login-form" action="" >
       <div className="Welcome">
         <h1>
-          <span className="font-weight-bold">Login</span>
+          <span className="font-weight-bold" style={{ color: '#00274C' }}>Super excited you’re with us!</span>
         </h1>
-        <h2>Welcome</h2>
+        <h2></h2>
       </div>
     
       <FormGroup>
@@ -68,10 +69,12 @@ export default function Login() {
       <Button
         variant="contained"
         onClick={submitLogin}
+        style={{ backgroundColor: '#007681', color: '#FFFFFF' }}
         className="btn btn-lg btn-dark btn-block button ">Login</Button>
-      <Button onClick={routeChange} className="btn btn-lg btn-dark btn-block ">Register</Button>
+      <Button onClick={routeChange} className="btn btn-lg btn-dark btn-block " style={{ backgroundColor: '#007681', color: '#FFFFFF' }}>Register</Button>
       <ToastContainer/>
     </Form>
+    </div>
   );
 }else {
   return (
